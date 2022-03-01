@@ -55,3 +55,26 @@ Para el producto seleccionado en una nueva ventana se mostraran:
 * Lista que contendrá los posibles proveedores.
 * Caja de texto editable que recibirá la cantidad deseada
 * Un botón para confirmar el pedido
+
+Base de datos
+=============
+
+Modelo Entidad-Relación
+-----------------------
+
+El análisis de las relaciones entre las entidades nos lleva al siguiente
+diagrama:
+
+![](./diagramas-entregable1/entidad-relacion.png)
+
+Diseño de la Base de datos
+--------------------------
+
+El convertir el diagrama ER en tablas nos da como resultado:
+
+![](./diagramas-entregable1/tablas.png)
+
+Diagrama de secuencias
+======================
+
+![](./diagramas-entregable1/diagrama-secuencias.png)
