@@ -1,0 +1,18 @@
+table {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border: 0.5px solid;
+    border-collapse: collapse;
+}
+
+th, td {
+    margin: 5px;
+    padding: 5px;
+    border: 0.5px solid;
+}
+
+thead {
+    background-color: #f0f0f0;
+}

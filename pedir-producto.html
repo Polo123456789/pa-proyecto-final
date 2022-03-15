@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedir Producto</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="form-wrapper">
+        <form class="form">
+            <h1>Solicidud de productos</h1>
+            <div class="form-inputs">
+                <label for="id">ID:</label>
+                <input type="number" id="id" name="id" value="1" disabled>
+                <label for="">Nombre:</label>
+                <input type="text" id="name" name="name" value="Manzanas" disabled>
+                <label for="provider">Proveedor:</label>
+                <select name="provider" id="provider">
+                    <option value="Proveedor 1">Manzanero S.A</option>
+                    <option value="Proveedor 2">Las Manzanas Rojas S.A</option>
+                </select>
+                <label for="amount">Cantidad:</label>
+                <input type="number" min="1" id="amount" name="amount">
+            </div>
+            <a href="lista-de-productos.html"><input type="button" value="Confirmar Pedido"></a>
+        </form>
+    </div>
+</body>
+</html>
