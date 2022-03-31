@@ -1,0 +1,25 @@
+{
+  "name": "pa-proyecto-final",
+  "version": "1.0.0",
+  "description": "Proyecto Final, Programacion Avanzada, TDS 2022",
+  "main": "main.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Polo123456789/pa-proyecto-final.git"
+  },
+  "author": "Pablo Sanchez (Carnet: 21001135)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Polo123456789/pa-proyecto-final/issues"
+  },
+  "homepage": "https://github.com/Polo123456789/pa-proyecto-final#readme",
+  "devDependencies": {
+    "electron": "18.0.1"
+  }
+}
