@@ -23,6 +23,7 @@
     "electron": "18.0.1"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "mysql2": "^2.3.3"
   }
 }

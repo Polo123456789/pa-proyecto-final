@@ -1,8 +1,11 @@
 module.exports = {
     db: {
-        name: "pa_proyecto_final",
+        name: "paProyectoFinal",
         username: process.env['MYSQL_USER'],
         password: process.env['MYSQL_PASSWORD'],
         host: 'localhost',
+    },
+    bcrypt: {
+        saltRounds: 10,
     }
 }
