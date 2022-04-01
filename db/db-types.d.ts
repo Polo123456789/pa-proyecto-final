@@ -1,3 +1,11 @@
+import {
+    QueryError,
+    RowDataPacket,
+    OkPacket,
+    ResultSetHeader,
+    FieldPacket
+} from 'mysql2';
+
 export interface usuario {
     readonly id?: number,
     nombre: string,
@@ -35,4 +43,14 @@ export interface pedido {
     usuarioId: number,
 }
 
+type mysqlError = QueryError;
+type mysqlFields = FieldPacket[];
+type mysqlResult = RowDataPacket[]
+                   | RowDataPacket[][]
+                   | OkPacket
+                   | OkPacket[]
+                   | ResultSetHeader;
 
+export type mysqlCallback = (err: mysqlError,
+                             result: mysqlResult,
+                             fields: mysqlFields) => any;

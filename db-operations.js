@@ -1,25 +1,100 @@
 // @ts-check
 const mysql = require("mysql2");
+const config = require("./config");
 
 /**
- * Tipos que describen las tablas
- *
  * @typedef {import("./db/db-types").usuario} user
  * @typedef {import("./db/db-types").producto} product
  * @typedef {import("./db/db-types").proveedor} provider
  * @typedef {import("./db/db-types").proveedorDaProducto} providerGivesProduct
  * @typedef {import("./db/db-types").pedido} order
+ * @typedef {import("./db/db-types").mysqlCallback} myslqCallback
  */
 
+const connection = mysql.createConnection({
+    host: config.db.host,
+    user: config.db.username,
+    password: config.db.password,
+    database: config.db.name,
+});
+
 /**
- * TODO:
- *
- * * Obtener contra por id
- * * Obtener todos los productos
- * * Actualizar los detalles de algun producto
- * * Obtener la lista de proveedores de un producto
- * * Crear pedido
- *
- * DONE: 
- *
+ * @argument {number} id
+ * @argument {myslqCallback} callback
  */
+const getPasswordById = (id, callback) => {
+    connection.query(
+        "SELECT contra FROM usuario WHERE id = ?;",
+        [id],
+        callback
+    )
+}
+
+/**
+ * @argument {myslqCallback} callback
+ */
+const getProducts = (callback) => {
+    connection.query(
+        "SELECT * FROM producto;",
+        callback
+    );
+}
+
+/**
+ * @argument {product} product
+ * @argument {myslqCallback} callback
+ */
+const updateProduct = (product, callback) => {
+    connection.query(
+        "UPDATE producto SET nombre = ?, descripcion = ?,"
+        + " categoria = ?, existencias = ? WHERE id = ?;",
+        [
+            product.nombre,
+            product.descripcion,
+            product.categoria,
+            product.existencias,
+            product.id
+        ],
+        callback
+    );
+}
+
+/**
+ * @argument {product} product
+ * @argument {myslqCallback} callback
+ */
+const getProvidersForProduct = (product, callback) => {
+    const providersIds =
+        "(SELECT proveedorId FROM proveedorDaProducto WHERE productoId = ?)";
+
+    connection.query(
+        "SELECT * FROM proveedor WHERE id IN " + providersIds + ";",
+        [product.id],
+        callback
+    );
+}
+
+/**
+ * @argument {product} product
+ * @argument {provider} provider
+ * @argument {user} user
+ * @argument {number} amount
+ * @argument {myslqCallback} callback
+ */
+const createOrder = (product, provider, user, amount, callback) => {
+    connection.query(
+        "INSERT INTO pedido "
+        + "(fecha, entregado, cantidad, proveedorId, productoId, usuarioId)"
+        + "VALUES (?, ?, ?, ?, ?, ?)",
+        [new Date(), 0, amount, provider.id, product.id, user.id],
+        callback
+    );
+}
+
+
+module.exports.connection = connection;
+module.exports.getPasswordById = getPasswordById;
+module.exports.getProducts = getProducts;
+module.exports.updateProduct = updateProduct;
+module.exports.getProvidersForProduct = getProvidersForProduct;
+module.exports.createOrder = createOrder;
