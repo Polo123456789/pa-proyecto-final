@@ -7,5 +7,8 @@ module.exports = {
     },
     bcrypt: {
         saltRounds: 10,
+    },
+    app: {
+        defaultPassword: 'password',
     }
 }
