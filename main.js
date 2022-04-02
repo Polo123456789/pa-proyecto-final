@@ -45,7 +45,6 @@ ipcMain.on("validate-password",
                 win.webContents.send("bad-login", err);
                 return;
             }
-            console.log(result);
             const badLoginMsg = "ID o contraseña incorrectos";
             const users = /** @type user[] */ (result);
 
@@ -71,7 +70,6 @@ ipcMain.on("ask-for-products", (_evt) => {
             console.error(err);
             return;
         }
-        console.log(result);
         win.webContents.send("handle-product-list", result);
     });
 })
@@ -79,7 +77,10 @@ ipcMain.on("ask-for-products", (_evt) => {
 ipcMain.on("go-to-update-product",
     /** @argument {product} product */
     (_evt, product) => {
-
+        win.loadFile("actualizar-producto.html");
+        win.webContents.on("did-finish-load", () => {
+            win.webContents.send("handle-product", product);
+        })
     }
 )
 
@@ -88,6 +89,15 @@ ipcMain.on("go-to-create-order",
      * @argument {product} product
      */
     (_evt, product) => {
-
+        win.loadFile("pedir-producto.html");
+        win.webContents.on("did-finish-load", () => {
+            db.getProvidersForProduct(product, (err, result) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                win.webContents.send("handle-products-and-providers", product, result);
+            })
+        })
     }
 )
