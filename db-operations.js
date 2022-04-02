@@ -22,9 +22,9 @@ const connection = mysql.createConnection({
  * @argument {number} id
  * @argument {myslqCallback} callback
  */
-const getPasswordById = (id, callback) => {
+const getUserById = (id, callback) => {
     connection.query(
-        "SELECT contra FROM usuario WHERE id = ?;",
+        "SELECT * FROM usuario WHERE id = ?;",
         [id],
         callback
     )
@@ -93,7 +93,7 @@ const createOrder = (product, provider, user, amount, callback) => {
 
 
 module.exports.connection = connection;
-module.exports.getPasswordById = getPasswordById;
+module.exports.getUserById = getUserById;
 module.exports.getProducts = getProducts;
 module.exports.updateProduct = updateProduct;
 module.exports.getProvidersForProduct = getProvidersForProduct;

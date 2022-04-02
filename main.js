@@ -18,6 +18,9 @@ const db = require("./db-operations");
 /** @type BrowserWindow */
 let win;
 
+/** @type user */
+let activeUser;
+
 app.on('ready', () => {
     win = new BrowserWindow({
         show: false,
@@ -35,7 +38,7 @@ app.on('ready', () => {
  * @argument {string} password
  */
 ipcMain.on("validate-password", (_evt, id, password) => {
-    db.getPasswordById(id, (err, result) => {
+    db.getUserById(id, (err, result) => {
         if (err) {
             console.error(err);
             win.webContents.send("bad-login", err);
@@ -51,6 +54,7 @@ ipcMain.on("validate-password", (_evt, id, password) => {
 
         const user = users[0];
         if (bcrypt.compareSync(password, user.contra)) {
+            activeUser = user;
             win.loadFile("lista-de-productos.html");
         } else {
             win.webContents.send("bad-login", badLoginMsg);
