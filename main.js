@@ -33,31 +33,61 @@ app.on('ready', () => {
     win.show();
 });
 
-/**
- * @argument {number} id
- * @argument {string} password
- */
-ipcMain.on("validate-password", (_evt, id, password) => {
-    db.getUserById(id, (err, result) => {
+ipcMain.on("validate-password",
+    /**
+     * @argument {number} id
+     * @argument {string} password
+    */
+    (_evt, id, password) => {
+        db.getUserById(id, (err, result) => {
+            if (err) {
+                console.error(err);
+                win.webContents.send("bad-login", err);
+                return;
+            }
+            console.log(result);
+            const badLoginMsg = "ID o contraseña incorrectos";
+            const users = /** @type user[] */ (result);
+
+            if (users.length == 0) {
+                win.webContents.send("bad-login", badLoginMsg);
+                return;
+            }
+
+            const user = users[0];
+            if (bcrypt.compareSync(password, user.contra)) {
+                activeUser = user;
+                win.loadFile("lista-de-productos.html");
+            } else {
+                win.webContents.send("bad-login", badLoginMsg);
+            }
+        })
+    }
+)
+
+ipcMain.on("ask-for-products", (_evt) => {
+    db.getProducts((err, result) => {
         if (err) {
             console.error(err);
-            win.webContents.send("bad-login", err);
             return;
         }
-        const badLoginMsg = "ID o contraseña incorrectos";
-        const users = /** @type user[] */ (result);
-
-        if (users.length == 0) {
-            win.webContents.send("bad-login", badLoginMsg);
-            return;
-        }
-
-        const user = users[0];
-        if (bcrypt.compareSync(password, user.contra)) {
-            activeUser = user;
-            win.loadFile("lista-de-productos.html");
-        } else {
-            win.webContents.send("bad-login", badLoginMsg);
-        }
-    })
+        console.log(result);
+        win.webContents.send("handle-product-list", result);
+    });
 })
+
+ipcMain.on("go-to-update-product",
+    /** @argument {product} product */
+    (_evt, product) => {
+
+    }
+)
+
+ipcMain.on("go-to-create-order", 
+    /**
+     * @argument {product} product
+     */
+    (_evt, product) => {
+
+    }
+)
