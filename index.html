@@ -14,14 +14,16 @@
         <form class="form">
             <h1>Inicio de sesion:</h1>
             <div class="form-inputs">
-                <label for="username">ID:</label>
-                <input type="text" name="username" id="username">
+                <label for="id">ID:</label>
+                <input type="number" name="id" id="id">
                 <label for="password">Contraseña:</label>
                 <input type="password" name="password" id="password">
             </div>
-            <a href="lista-de-productos.html"><input type="button" value="Iniciar sesion" class="form-btn"></a>
+            <input type="submit" id="login-btn" value="Iniciar Sesion">
+            <p style="color: red" id="error-msg"></p>
         </form>
     </div>
+    <script src="index.js"></script>
 </body>
 
 </html>

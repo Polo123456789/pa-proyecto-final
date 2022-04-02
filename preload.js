@@ -1,4 +1,3 @@
-// @ts-check
 const {contextBridge, ipcRenderer} = require("electron");
 
 contextBridge.exposeInMainWorld("electron", {
@@ -8,6 +7,9 @@ contextBridge.exposeInMainWorld("electron", {
     validatePassword: (id, password) => {
         ipcRenderer.send("validate-password", id, password);
     },
+    /**
+     * @argument {(message: string) => void} callback
+     */
     handleBadLogin: (callback) => {
         ipcRenderer.on("bad-login", callback);
     },
