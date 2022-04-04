@@ -18,6 +18,7 @@ export interface producto {
     descripcion: string,
     categoria: string,
     existencias: number,
+    cantidadEnPedido?: number | null,
 }
 
 export interface proveedor {

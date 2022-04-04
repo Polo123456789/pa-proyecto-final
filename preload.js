@@ -70,5 +70,5 @@ contextBridge.exposeInMainWorld("electron", {
      */
     createOrder: (product, provider, amount) => {
         ipcRenderer.send("create-order", product, provider, amount);
-    }
+    },
 });

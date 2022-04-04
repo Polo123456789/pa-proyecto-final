@@ -35,7 +35,8 @@ const getUserById = (id, callback) => {
  */
 const getProducts = (callback) => {
     connection.query(
-        "SELECT * FROM producto;",
+        "SELECT producto.*, SUM(pedido.cantidad) AS cantidadEnPedido FROM producto "
+        + "LEFT JOIN pedido ON pedido.productoId = producto.id;",
         callback
     );
 }

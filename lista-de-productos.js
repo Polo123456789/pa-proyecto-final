@@ -41,7 +41,11 @@ const createProductRow = (product) => {
     name.innerText = product.nombre;
     description.innerText = product.descripcion;
     categorie.innerText = product.categoria;
-    existencies.innerText = product.existencias.toString();
+    let enPedido = "";
+    if (product.cantidadEnPedido) {
+        enPedido = `(${product.cantidadEnPedido})`;
+    }
+    existencies.innerText = product.existencias.toString() + enPedido;
     update.appendChild(updateBtn);
     makeOrder.appendChild(makeOrderBtn);
 

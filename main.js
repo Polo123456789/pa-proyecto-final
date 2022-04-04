@@ -70,6 +70,7 @@ ipcMain.on("ask-for-products", (_evt) => {
             console.error(err);
             return;
         }
+        console.log(result)
         win.webContents.send("handle-product-list", result);
     });
 })
