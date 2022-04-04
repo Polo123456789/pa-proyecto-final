@@ -41,6 +41,7 @@ const handleProductAndProviders = (_evt, p, prviders) => {
     name.value = product.nombre;
     amount.value = "0";
 
+    providerList.innerHTML = "";
     for (let i = 0; i < providers.length; i++) {
         const option = document.createElement("option");
         option.value = i.toString();
