@@ -92,6 +92,18 @@ const createOrder = (product, provider, user, amount, callback) => {
     );
 }
 
+/**
+ * @argument {product} product
+ * @argument {myslqCallback} callback
+ */
+const getOrders = (product, callback) => {
+    connection.query(
+        "SELECT * FROM pedido WHERE productoId = ?;",
+        [product.id],
+        callback
+    );
+}
+
 
 module.exports.connection = connection;
 module.exports.getUserById = getUserById;
@@ -99,3 +111,4 @@ module.exports.getProducts = getProducts;
 module.exports.updateProduct = updateProduct;
 module.exports.getProvidersForProduct = getProvidersForProduct;
 module.exports.createOrder = createOrder;
+module.exports.getOrders = getOrders;

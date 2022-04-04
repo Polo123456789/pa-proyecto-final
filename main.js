@@ -1,6 +1,6 @@
 // @ts-check
 
-const {app, BrowserWindow, ipcMain} = require('electron');
+const {app, BrowserWindow, ipcMain, dialog} = require('electron');
 const bcrypt = require("bcrypt");
 const path = require("path");
 
@@ -120,11 +120,39 @@ ipcMain.on("create-order",
      * @argument {number} amount
      */
     (_evt, product, provider, amount) => {
-        db.createOrder(product, provider, activeUser, amount, (err) => {
+        const createOrder = () => {
+            db.createOrder(product, provider, activeUser, amount, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+                win.loadFile("lista-de-productos.html");
+            });
+        }
+
+        db.getOrders(product, (err, result) => {
             if (err) {
                 console.error(err);
             }
-            win.loadFile("lista-de-productos.html");
-        });
+            const orders = /** @type order[] */ (result);
+
+            if (orders.length == 0) {
+                createOrder();
+                return;
+            }
+            
+            for (const o of orders) {
+                if (o.proveedorId == provider.id) {
+                    dialog.showErrorBox("Error", "Ya existe un pedido con ese proveedor");
+                    return;
+                }
+            }
+
+            dialog.showErrorBox(
+                "Nota",
+                "Ya existe un pedido, pero para un proveedor diferente, el "
+                + "pedido se hara de igual modo"
+            );
+            createOrder();
+        })
     }
 )
