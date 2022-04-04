@@ -4,10 +4,10 @@
 const id = document.querySelector("#id");
 /** @type HTMLInputElement */
 const password = document.querySelector("#password");
-/** @type HTMLInputElement */
-const loginBtn = document.querySelector("#login-btn")
 /** @type HTMLParagraphElement */
 const errMsg = document.querySelector("#error-msg");
+
+const form = document.querySelector("form")
 
 /**
  * @param {any} _evt
@@ -20,7 +20,7 @@ const handleBadLogin = (_evt, message) => {
 // @ts-ignore
 window.electron.handleBadLogin(handleBadLogin);
 
-loginBtn.addEventListener("click", (evt) => {
+form.addEventListener("submit", (evt) => {
     evt.preventDefault();
     // @ts-ignore
     window.electron.validatePassword(id.value, password.value);

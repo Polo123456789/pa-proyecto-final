@@ -18,8 +18,8 @@ const name = document.querySelector("#name");
 const providerList = document.querySelector("#provider");
 /** @type HTMLInputElement */
 const amount = document.querySelector("#amount");
-/** @type HTMLInputElement */
-const confirmOrderBtn = document.querySelector("#confirm-order");
+
+const form = document.querySelector("form");
 
 
 /** @type product */
@@ -53,7 +53,7 @@ const handleProductAndProviders = (_evt, p, prviders) => {
 // @ts-ignore
 window.electron.handleProductAndProviders(handleProductAndProviders);
 
-confirmOrderBtn.addEventListener("click", (evt) => {
+form.addEventListener("submit", (evt) => {
     evt.preventDefault();
 
     const index = parseInt(providerList.value);

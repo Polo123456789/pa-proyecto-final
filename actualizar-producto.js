@@ -20,9 +20,8 @@ const categorie = document.querySelector("#categorie");
 /** @type HTMLInputElement */
 const exitencies = document.querySelector("#exitencies");
 /** @type HTMLInputElement */
-const updateBtn = document.querySelector("#update-btn");
-/** @type HTMLInputElement */
 const discardBtn = document.querySelector("#discard-btn");
+const form = document.querySelector("form");
 
 /**
  * @argument {any} _evt
@@ -42,7 +41,7 @@ discardBtn.addEventListener("click", () => {
     window.location.href = "lista-de-productos.html";
 })
 
-updateBtn.addEventListener("click", (evt) => {
+form.addEventListener("submit", (evt) => {
     evt.preventDefault();
 
     /** @type product */
