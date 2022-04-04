@@ -50,6 +50,7 @@ contextBridge.exposeInMainWorld("electron", {
     handleProduct: (callback) => {
         ipcRenderer.on("handle-product", callback);
     },
+    /** @argument {product} product */
     updateProduct: (product) => {
         ipcRenderer.send("update-product", product);
     },
@@ -62,6 +63,11 @@ contextBridge.exposeInMainWorld("electron", {
     handleProductAndProviders: (callback) => {
         ipcRenderer.on("handle-products-and-providers", callback);
     },
+    /**
+     * @argument {product} product
+     * @argument {provider} provider
+     * @argument {number} amount
+     */
     createOrder: (product, provider, amount) => {
         ipcRenderer.send("create-order", product, provider, amount);
     }

@@ -101,3 +101,29 @@ ipcMain.on("go-to-create-order",
         })
     }
 )
+
+ipcMain.on("update-product", (_evt, product) => {
+    db.updateProduct(product, (err) => {
+        if (err) {
+            console.error(err);
+        }
+        win.loadFile("lista-de-productos.html");
+    })
+})
+
+ipcMain.on("create-order",
+    /**
+     * @argument {any} _evt
+     * @argument {product} product
+     * @argument {provider} provider
+     * @argument {number} amount
+     */
+    (_evt, product, provider, amount) => {
+        db.createOrder(product, provider, activeUser, amount, (err) => {
+            if (err) {
+                console.error(err);
+            }
+            win.loadFile("lista-de-productos.html");
+        });
+    }
+)
