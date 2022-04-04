@@ -14,13 +14,13 @@
                 <label for="id">ID:</label>
                 <input type="number" name="id" id="id" value="" disabled>
                 <label for="name">Nombre:</label>
-                <input type="text" name="name" id="name" value="">
+                <input type="text" name="name" id="name" value="" minlength="1" maxlength="45" required>
                 <label for="description">Descripción:</label>
-                <input type="text" name="description" id="description" value="">
+                <input type="text" name="description" id="description" value="" minlength="1" maxlength="255" required>
                 <label for="categorie">Categoría:</label>
-                <input type="text" name="categorie" id="categorie" value="">
+                <input type="text" name="categorie" id="categorie" value="" minlength="1" maxlength="45" required>
                 <label for="exitencies">Existencias:</label>
-                <input type="text" name="existencies" id="exitencies" value="">
+                <input type="number" name="existencies" id="exitencies" value="" min="0" required>
             </div>
             <input type="submit" id="update-btn" value="Actualizar">
             <input type="button" id="discard-btn" value="Descartar">

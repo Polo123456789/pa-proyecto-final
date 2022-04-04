@@ -15,9 +15,9 @@
             <h1>Inicio de sesion:</h1>
             <div class="form-inputs">
                 <label for="id">ID:</label>
-                <input type="number" name="id" id="id">
+                <input type="number" name="id" id="id" required>
                 <label for="password">Contraseña:</label>
-                <input type="password" name="password" id="password">
+                <input type="password" name="password" id="password" minlength="1" maxlength="45" required>
             </div>
             <input type="submit" id="login-btn" value="Iniciar Sesion">
             <p style="color: red" id="error-msg"></p>
